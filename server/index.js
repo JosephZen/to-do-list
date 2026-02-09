@@ -63,9 +63,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// ✅ LOGIN ROUTE (Fixed Logic)
 app.post('/login', async(req, res) => {
-  // FIX: If already logged in, return SUCCESS (true), not false
   if (req.session.user) {
     return res.status(200).json({ 
       success: true, 
@@ -105,7 +103,6 @@ app.post('/login', async(req, res) => {
   }
 });
 
-// ✅ LOGOUT ROUTE (Fixed Cookie Path)
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -116,15 +113,19 @@ app.post('/logout', (req, res) => {
   });
 });
 
-// ✅ GET SESSION
-app.get('/get-session', (req, res) => {
-  if (req.session.user) {
-    res.status(200).json({ session: true, user: req.session.user });
-  } else {
-    res.status(200).json({ session: false, user: null });
+// ✅ 3. SECURE COOKIES
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'my_super_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    // Secure: true on Render (HTTPS), false on Localhost
+    secure: process.env.NODE_ENV === 'production', 
+    // SameSite: 'none' required for Vercel -> Render connection
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+    maxAge: 1000 * 60 * 60 * 24 // 24 Hours
   }
-});
-
+}));
 
 app.get('/get-list', async (req, res) => {
   try {
