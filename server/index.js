@@ -5,7 +5,7 @@ import session from 'express-session';
 import cors from 'cors';
 
 const app = express();
-const PORT = 3000;
+
 
 
 app.use(cors({
@@ -15,7 +15,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
+const PORT = 3000;
 
 app.use(session({
   secret: 'my_super_secret_key',
