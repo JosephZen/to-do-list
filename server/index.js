@@ -3,10 +3,7 @@ import { pool } from './db.js';
 import { hashPassword, comparePassword } from './components/hash.js';
 import session from 'express-session';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
-
-dotenv.config();
 const app = express();
 const PORT = 3000;
 
