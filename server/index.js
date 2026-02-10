@@ -17,8 +17,25 @@ app.set('trust proxy', 1);
 // Old code allowed the Backend URL. New code allows Localhost (for dev) 
 // or strictly uses the FRONTEND_URL variable (for Vercel).
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://to-do-list-p82pkefs2-joseph-zen-castros-projects.vercel.app', 
-  credentials: true,               
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://to-do-list-p82pkefs2-joseph-zen-castros-projects.vercel.app"
+    ];
+
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      // If the origin isn't in the list, check if it matches the ENV variable
+      if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
