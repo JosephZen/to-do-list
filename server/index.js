@@ -17,7 +17,7 @@ app.set('trust proxy', 1);
 // Old code allowed the Backend URL. New code allows Localhost (for dev) 
 // or strictly uses the FRONTEND_URL variable (for Vercel).
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', 
+  origin: process.env.FRONTEND_URL || 'https://to-do-list-p82pkefs2-joseph-zen-castros-projects.vercel.app', 
   credentials: true,               
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
