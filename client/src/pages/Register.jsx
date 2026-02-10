@@ -11,21 +11,20 @@ function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-
   const handleRegister = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
 
-      if (password !== confirm) {
-            Swal.fire('Error', 'Passwords do not match', 'warning');
-            return;
-          }
+    if (password !== confirm) {
+      Swal.fire('Error', 'Passwords do not match', 'warning');
+      return;
+    }
 
-          setIsLoading(true);
+    setIsLoading(true);
 
-      try {
-        const response = await axios.post('/register', { 
-          name, username, password, confirm 
-        });
+    try {
+      const response = await axios.post('/register', { 
+        name, username, password, confirm 
+      });
 
       if (response.data.success) {
         Swal.fire({
@@ -52,10 +51,46 @@ function Register() {
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Register</h1>
         <form className="space-y-4">
-          <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-3 border rounded-lg" />
-          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full p-3 border rounded-lg" />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 border rounded-lg" />
-          <input type="password" placeholder="Confirm Password" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="w-full p-3 border rounded-lg" />
+          <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            autoComplete="name"
+            placeholder="Full Name" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            className="w-full p-3 border rounded-lg" 
+          />
+          <input 
+            type="text" 
+            name="username" 
+            id="username" 
+            autoComplete="username"
+            placeholder="Username" 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
+            className="w-full p-3 border rounded-lg" 
+          />
+          <input 
+            type="password" 
+            name="password" 
+            id="password" 
+            autoComplete="new-password"
+            placeholder="Password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            className="w-full p-3 border rounded-lg" 
+          />
+          <input 
+            type="password" 
+            name="confirm" 
+            id="confirm" 
+            autoComplete="new-password"
+            placeholder="Confirm Password" 
+            value={confirm} 
+            onChange={(e) => setConfirm(e.target.value)} 
+            className="w-full p-3 border rounded-lg" 
+          />
           
           <button onClick={handleRegister} disabled={isLoading} className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
             {isLoading ? "Creating..." : "Register"}
