@@ -11,21 +11,21 @@ function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+
   const handleRegister = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
 
-    if (password !== confirm) {
-      Swal.fire('Error', 'Passwords do not match', 'warning');
-      return;
-    }
+      if (password !== confirm) {
+            Swal.fire('Error', 'Passwords do not match', 'warning');
+            return;
+          }
 
-    setIsLoading(true);
+          setIsLoading(true);
 
-    try {
-      // Sends: name, username, password, confirm
-      const response = await axios.post('/register', {
-        name, username, password, confirm
-      });
+      try {
+        const response = await axios.post('/register', { 
+          name, username, password, confirm 
+        });
 
       if (response.data.success) {
         Swal.fire({

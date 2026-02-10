@@ -15,7 +15,7 @@ app.set('trust proxy', 1);
 
 // ✅ 2. CORS: Dynamic - allows Vercel in Prod, Localhost in Dev
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', 
+  origin: process.env.FRONTEND_URL || 'https://to-do-list-wr45.onrender.com', 
   credentials: true,               
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
