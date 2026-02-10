@@ -25,7 +25,7 @@ function App() {
           timer: 1500,
           showConfirmButton: false
         }).then(() => {
-           navigate('/Home'); // Uncomment this when you are ready to go to Home
+           navigate('/Home'); 
         });
       }
     } catch (error) {
@@ -46,6 +46,9 @@ function App() {
         <form className="space-y-4">
           <input 
             type="text" 
+            id="username"           // ✅ Added ID
+            name="username"         // ✅ Added Name
+            autoComplete="username" // ✅ Added AutoComplete
             placeholder="Username" 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -53,6 +56,9 @@ function App() {
           />
           <input 
             type="password" 
+            id="password"                   // ✅ Added ID
+            name="password"                 // ✅ Added Name
+            autoComplete="current-password" // ✅ Added AutoComplete
             placeholder="Password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
