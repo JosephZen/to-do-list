@@ -221,7 +221,20 @@ function ListItems() {
 
                             {/* EDIT/DELETE BUTTONS */}
                             <div className="flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-                                {/* ... buttons ... */}
+                                <button 
+                                    onClick={() => handleEditItem(item)}
+                                    className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                    title="Edit Task"
+                                >
+                                    ✎
+                                </button>
+                                <button 
+                                    onClick={() => handleDeleteItem(item.id)}
+                                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                    title="Delete Task"
+                                >
+                                    🗑
+                                </button>
                             </div>
                         </div>
                     ))}
